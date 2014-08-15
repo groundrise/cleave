@@ -18,6 +18,15 @@
     </license>
   </licenses>
 
+  <developers>
+    <developer>
+      <name>Nicholas Bugajski</name>
+      <email>nick@groundrise.com</email>
+      <organization>Groundrise</organization>
+      <organizationUrl>http://groundrise.com</organizationUrl>
+    </developer>
+  </developers>
+
   <scm>
     <url>https://github.com/groundrise/cleave</url>
     <connection>scm:git:https://github.com/groundrise/cleave.git</connection>
