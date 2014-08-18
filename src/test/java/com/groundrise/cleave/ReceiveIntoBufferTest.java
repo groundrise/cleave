@@ -68,7 +68,7 @@ public class ReceiveIntoBufferTest {
         receiver.endWord();
         receiver.endLine();
         String output = buffer.toString();
-        assertThat(output, is("a\u001e\n"));
+        assertThat(output, is("a\n \n\n"));
     }
 
     /**
@@ -81,7 +81,7 @@ public class ReceiveIntoBufferTest {
         receiver.endWord();
         receiver.endLine();
         String output = buffer.toString();
-        assertThat(output, is("a\u001fb\u001e\n"));
+        assertThat(output, is("a\nb\n \n\n"));
     }
 
     /**
@@ -94,7 +94,7 @@ public class ReceiveIntoBufferTest {
         receiver.endWord();
         receiver.endLine();
         String output = buffer.toString();
-        assertThat(output, is("abc\u001fde\u001e\n"));
+        assertThat(output, is("abc\nde\n \n\n"));
     }
 
     /**
@@ -110,6 +110,23 @@ public class ReceiveIntoBufferTest {
         receiver.endWord();
         receiver.endLine();
         String output = buffer.toString();
-        assertThat(output, is("a\u001fb\u001ec\u001fd\u001e\n"));
+        assertThat(output, is("a\nb\n \nc\nd\n \n\n"));
+    }
+
+    /**
+     * Document ending with file separator character
+     */
+    @Test
+    public void testFileSeparator() {
+        receiver.addChar( "One" );
+        receiver.endWord();
+        receiver.addChar( "Two" );
+        receiver.endWord();
+        receiver.endLine();
+        receiver.addChar( "\u001c" );
+        receiver.endWord();
+        receiver.endLine();
+        String output = buffer.toString();
+        assertThat(output, is("One\n \nTwo\n \n\n\u001c\n \n\n"));
     }
 }

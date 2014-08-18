@@ -86,7 +86,7 @@ public class MainTest {
         final int result = program.split(wrap("one\n   \t\t\t \ntwo\n"), ps);
         final String output = baos.toString();
         assertThat(result, is(2));
-        assertThat(output.length(), is(14));
+        assertThat(output.length(), is(18));
     }
 
     /**

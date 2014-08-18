@@ -28,17 +28,16 @@ class ReceiveIntoStream implements Receiver {
 
     @Override
     public void addChar(String c) {
-        if (Input.CHAR == last) {
-            out.append('\u001f');
-        }
         out.append(c);
+        out.append('\n');
         last = Input.CHAR;
     }
 
     @Override
     public void endWord() {
         if (Input.CHAR == last) {
-            out.append('\u001e');
+            out.append(' ');
+            out.append('\n');
         }
         last = Input.WORD;
     }
