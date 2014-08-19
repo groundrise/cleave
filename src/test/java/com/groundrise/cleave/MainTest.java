@@ -31,7 +31,7 @@ public class MainTest {
 
     @Before
     public void setUp() {
-        program = new Main(true);
+        program = new Main();
         baos = new ByteArrayOutputStream();
         ps = new PrintStream(baos);
         

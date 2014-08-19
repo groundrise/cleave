@@ -39,7 +39,7 @@ public class Main {
 
         try {
             final Options opts = CliFactory.parseArgumentsUsingInstance(new Options(), args);
-            final Main program = new Main(opts.getWhitespaceSplit());
+            final Main program = new Main();
             final List<File> files = opts.getInputFiles();
             if (0 == files.size()) {
                 files.add(new File("-"));
@@ -62,14 +62,8 @@ public class Main {
         System.exit(0);
     }
 
-    private final Splitter splitter;
+    private final Splitter splitter = new UnicodeSplitter();
     private long lastlog;
-
-    public Main(final boolean doWhitespaceSplit) {
-        splitter = doWhitespaceSplit
-                 ? new WhitespaceSplitter()
-                 : new UnicodeSplitter();
-    }
 
     public int split(final List<File> inFiles, final PrintStream dest) throws IOException {
         Timer timer = new Timer();

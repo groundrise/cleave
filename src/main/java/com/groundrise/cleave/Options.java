@@ -22,20 +22,10 @@ import java.util.List;
 
 @CommandLineInterface(application = "cleave")
 class Options {
-    private boolean whitespaceSplit;
     private final List<File> inputFiles = new ArrayList<>();
 
     @Option(helpRequest = true, description = "display help", shortName = "h")
     void setHelp( boolean help ) {}
-
-    boolean getWhitespaceSplit() {
-        return whitespaceSplit;
-    }
-
-    @Option(shortName = "w", longName = "whitespace-split", description = "Split into words using whitespace instead of the Unicode standard method.")
-    void setWhitespaceSplit(final boolean w) {
-        whitespaceSplit = w;
-    }
 
     List<File> getInputFiles() {
         return inputFiles;
