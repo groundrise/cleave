@@ -76,8 +76,8 @@ public class ReceiveIntoBufferTest {
      */
     @Test
     public void testTwoCharDocument() {
-        receiver.addChar( "a" );
-        receiver.addChar( "b" );
+        receiver.addChar("a");
+        receiver.addChar("b");
         receiver.endWord();
         receiver.endLine();
         String output = buffer.toString();
@@ -89,8 +89,8 @@ public class ReceiveIntoBufferTest {
      */
     @Test
     public void testLongChar() {
-        receiver.addChar( "abc" );
-        receiver.addChar( "de" );
+        receiver.addChar("abc");
+        receiver.addChar("de");
         receiver.endWord();
         receiver.endLine();
         String output = buffer.toString();
@@ -102,11 +102,11 @@ public class ReceiveIntoBufferTest {
      */
     @Test
     public void testTwoWordDocument() {
-        receiver.addChar( "a" );
-        receiver.addChar( "b" );
+        receiver.addChar("a");
+        receiver.addChar("b");
         receiver.endWord();
-        receiver.addChar( "c" );
-        receiver.addChar( "d" );
+        receiver.addChar("c");
+        receiver.addChar("d");
         receiver.endWord();
         receiver.endLine();
         String output = buffer.toString();
@@ -118,12 +118,12 @@ public class ReceiveIntoBufferTest {
      */
     @Test
     public void testFileSeparator() {
-        receiver.addChar( "One" );
+        receiver.addChar("One");
         receiver.endWord();
-        receiver.addChar( "Two" );
+        receiver.addChar("Two");
         receiver.endWord();
         receiver.endLine();
-        receiver.addChar( "\u001c" );
+        receiver.addChar("\u001c");
         receiver.endWord();
         receiver.endLine();
         String output = buffer.toString();

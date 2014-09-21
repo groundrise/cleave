@@ -33,41 +33,41 @@ class UnicodeSplitter implements Splitter {
     }
 
     @Override
-    public boolean split( final String input, final Receiver receiver) {
+    public boolean split(final String input, final Receiver receiver) {
 
-        wordBounds.setText( input );
-        for ( int last = wordBounds.first(), current = wordBounds.next();
+        wordBounds.setText(input);
+        for (int last = wordBounds.first(), current = wordBounds.next();
                 BreakIterator.DONE != current;
-                last = current, current = wordBounds.next() ) {
+                last = current, current = wordBounds.next()) {
 
             boolean isWord = false;
-            for ( int offset = last; offset < current; ) {
-                final int codepoint = input.codePointAt( offset );
-                if ( Character.isLetterOrDigit( codepoint ) ) {
+            for (int offset = last; offset < current; ) {
+                final int codepoint = input.codePointAt(offset);
+                if (Character.isLetterOrDigit(codepoint)) {
                     isWord = true;
                     break;
                 }
 
-                offset += Character.charCount( codepoint );
+                offset += Character.charCount(codepoint);
             }
-            if ( !isWord ) {
+            if (!isWord) {
                 continue;
             }
 
-            splitWord( input.substring( last, current ), receiver );
+            splitWord(input.substring(last, current), receiver);
         }
 
         return receiver.endLine();
     }
 
-    private void splitWord( final String input, final Receiver receiver ) {
+    private void splitWord(final String input, final Receiver receiver) {
         words++;
-        charBounds.setText( input );
-        for ( int start = charBounds.first(), end = charBounds.next();
+        charBounds.setText(input);
+        for (int start = charBounds.first(), end = charBounds.next();
                 BreakIterator.DONE != end;
-                start = end, end = charBounds.next() ) {
+                start = end, end = charBounds.next()) {
             characters++;
-            receiver.addChar( input.substring( start, end ) );
+            receiver.addChar(input.substring(start, end));
         }
 
         receiver.endWord();

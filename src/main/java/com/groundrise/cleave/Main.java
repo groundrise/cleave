@@ -45,17 +45,17 @@ public class Main {
                 files.add(new File("-"));
             }
             program.split(files, System.out);
-        } catch ( HelpRequestedException e ) {
+        } catch (HelpRequestedException e) {
             log.info(e.getMessage());
             System.exit(0);
-        } catch ( ArgumentValidationException | InvalidOptionSpecificationException e ) {
+        } catch (ArgumentValidationException | InvalidOptionSpecificationException e) {
             log.error(e.getMessage());
             System.exit(1);
         } catch (IOException ex) {
-            log.error( "IO Failure", ex );
+            log.error("IO Failure", ex);
             System.exit(1);
-        } catch ( RuntimeException e ) {
-            log.error( "Unexpected failure, probably a bug.", e );
+        } catch (RuntimeException e) {
+            log.error("Unexpected failure, probably a bug.", e);
             System.exit(1);
         }
 
@@ -88,11 +88,11 @@ public class Main {
             return 0 < split(System.in, dest);
         }
 
-        if ( !src.exists() ) {
-            throw new FileNotFoundException( src.getPath() + " does not exist." );
+        if (!src.exists()) {
+            throw new FileNotFoundException(src.getPath() + " does not exist.");
         }
-        if ( !src.canRead() ) {
-            throw new ArgumentValidationException( "Unable to read from: " + src.getPath() );
+        if (!src.canRead()) {
+            throw new ArgumentValidationException("Unable to read from: " + src.getPath());
         }
 
         boolean result;
