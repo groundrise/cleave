@@ -106,7 +106,7 @@ public class MainTest {
     @Test
     public void testSplitsSingleDocumentInStream() {
         final String contents = "A short document.";
-        int changed = program.split(wrap(contents), ps);
+        final int changed = program.split(wrap(contents), ps);
         final String output = baos.toString();
         assertThat(changed, is(1));
         assertThat(output.length(), is(greaterThan(contents.length())));
@@ -118,7 +118,7 @@ public class MainTest {
     @Test
     public void testSplitsMultipleDocuments() {
         final String contents = "one\ntwo\n";
-        int changed = program.split(wrap(contents), ps);
+        final int changed = program.split(wrap(contents), ps);
         final String output = baos.toString();
         assertThat(changed, is(2));
         assertThat(output.length(), is(greaterThan(contents.length())));

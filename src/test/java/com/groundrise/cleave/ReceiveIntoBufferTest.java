@@ -45,7 +45,7 @@ public class ReceiveIntoBufferTest {
     @Test
     public void emptyLineIsEmpty() {
         receiver.endLine();
-        String output = buffer.toString();
+        final String output = buffer.toString();
         assertThat(output, is(""));
     }
 
@@ -55,7 +55,7 @@ public class ReceiveIntoBufferTest {
     @Test
     public void emptyLineGetsNewline() {
         receiver.emptyLine();
-        String output = buffer.toString();
+        final String output = buffer.toString();
         assertThat(output, is("\n"));
     }
 
@@ -67,7 +67,7 @@ public class ReceiveIntoBufferTest {
         receiver.addChar("a");
         receiver.endWord();
         receiver.endLine();
-        String output = buffer.toString();
+        final String output = buffer.toString();
         assertThat(output, is("a\n \n\n"));
     }
 
@@ -80,7 +80,7 @@ public class ReceiveIntoBufferTest {
         receiver.addChar("b");
         receiver.endWord();
         receiver.endLine();
-        String output = buffer.toString();
+        final String output = buffer.toString();
         assertThat(output, is("a\nb\n \n\n"));
     }
 
@@ -93,7 +93,7 @@ public class ReceiveIntoBufferTest {
         receiver.addChar("de");
         receiver.endWord();
         receiver.endLine();
-        String output = buffer.toString();
+        final String output = buffer.toString();
         assertThat(output, is("abc\nde\n \n\n"));
     }
 
@@ -109,7 +109,7 @@ public class ReceiveIntoBufferTest {
         receiver.addChar("d");
         receiver.endWord();
         receiver.endLine();
-        String output = buffer.toString();
+        final String output = buffer.toString();
         assertThat(output, is("a\nb\n \nc\nd\n \n\n"));
     }
 
@@ -126,7 +126,7 @@ public class ReceiveIntoBufferTest {
         receiver.addChar("\u001c");
         receiver.endWord();
         receiver.endLine();
-        String output = buffer.toString();
+        final String output = buffer.toString();
         assertThat(output, is("One\n \nTwo\n \n\n\u001c\n \n\n"));
     }
 }

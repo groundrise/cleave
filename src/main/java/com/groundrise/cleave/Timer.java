@@ -27,7 +27,7 @@ class Timer {
     private final long startReal;
 
     Timer() {
-        ThreadMXBean bean = ManagementFactory.getThreadMXBean();
+        final ThreadMXBean bean = ManagementFactory.getThreadMXBean();
         if (bean.isCurrentThreadCpuTimeSupported()) {
             startCpu  = bean.getCurrentThreadCpuTime();
             startUser = bean.getCurrentThreadUserTime();
@@ -39,7 +39,7 @@ class Timer {
     }
 
     void report() {
-        ThreadMXBean bean = ManagementFactory.getThreadMXBean();
+        final ThreadMXBean bean = ManagementFactory.getThreadMXBean();
         final long endReal = System.nanoTime();
         final long endCpu  = bean.getCurrentThreadCpuTime();
         final long endUser = bean.getCurrentThreadUserTime();

@@ -64,11 +64,11 @@ public class Main {
     private long lastlog;
 
     public int split(final List<File> inFiles, final PrintStream dest) throws IOException {
-        Timer timer = new Timer();
+        final Timer timer = new Timer();
         int changeCount = 0;
         for (final File file : inFiles) {
             logProgress(changeCount);
-            boolean madeChanges = split(file, dest);
+            final boolean madeChanges = split(file, dest);
             if (madeChanges) {
                 changeCount++;
             }
