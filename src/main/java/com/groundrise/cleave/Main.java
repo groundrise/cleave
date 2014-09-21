@@ -44,16 +44,16 @@ public class Main {
                 files.add(new File("-"));
             }
             program.split(files, System.out);
-        } catch (HelpRequestedException e) {
+        } catch (final HelpRequestedException e) {
             log.info(e.getMessage());
             System.exit(0);
-        } catch (ArgumentValidationException | InvalidOptionSpecificationException e) {
+        } catch (final ArgumentValidationException | InvalidOptionSpecificationException e) {
             log.error(e.getMessage());
             System.exit(1);
-        } catch (IOException ex) {
+        } catch (final IOException ex) {
             log.error("IO Failure", ex);
             System.exit(1);
-        } catch (RuntimeException e) {
+        } catch (final RuntimeException e) {
             log.error("Unexpected failure, probably a bug.", e);
             System.exit(1);
         }
@@ -66,7 +66,7 @@ public class Main {
     public int split(final List<File> inFiles, final PrintStream dest) throws IOException {
         Timer timer = new Timer();
         int changeCount = 0;
-        for (File file : inFiles) {
+        for (final File file : inFiles) {
             logProgress(changeCount);
             boolean madeChanges = split(file, dest);
             if (madeChanges) {

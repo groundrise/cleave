@@ -27,7 +27,7 @@ class ReceiveIntoStream implements Receiver {
     }
 
     @Override
-    public void addChar(String c) {
+    public void addChar(final String c) {
         out.append(c);
         out.append('\n');
         last = Input.CHAR;

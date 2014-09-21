@@ -25,14 +25,14 @@ class Options {
     private final List<File> inputFiles = new ArrayList<>();
 
     @Option(helpRequest = true, description = "display help", shortName = "h")
-    void setHelp(boolean help) {}
+    void setHelp(final boolean help) {}
 
     List<File> getInputFiles() {
         return inputFiles;
     }
 
     @Unparsed(name = "input files")
-    void setInputFiles(List<File> files) {
+    void setInputFiles(final List<File> files) {
         inputFiles.addAll(files);
     }
 }
