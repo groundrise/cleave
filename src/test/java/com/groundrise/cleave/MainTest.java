@@ -34,7 +34,6 @@ public class MainTest {
         program = new Main();
         baos = new ByteArrayOutputStream();
         ps = new PrintStream(baos);
-        
     }
 
     @After

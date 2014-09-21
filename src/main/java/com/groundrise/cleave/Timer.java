@@ -43,12 +43,10 @@ class Timer {
         final long endReal = System.nanoTime();
         final long endCpu  = bean.getCurrentThreadCpuTime();
         final long endUser = bean.getCurrentThreadUserTime();
-
         final long currReal   = endReal - startReal;
         final long currCpu    = endCpu  - startCpu;
         final long currUser   = endUser - startUser;
         final long currSystem = currCpu - currUser;
-
         if (bean.isCurrentThreadCpuTimeSupported()) {
             log.info("{} ns real, {} ns user + {} ns system = {} ns CPU",
                     new Object[]{currReal, currUser, currSystem, currCpu});

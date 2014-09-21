@@ -47,7 +47,6 @@ class ReceiveIntoStream implements Receiver {
         if (Input.START == last) {
             return false;
         }
-
         out.append('\n');
         last = Input.START;
         return true;

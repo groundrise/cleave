@@ -34,12 +34,10 @@ class UnicodeSplitter implements Splitter {
 
     @Override
     public boolean split(final String input, final Receiver receiver) {
-
         wordBounds.setText(input);
         for (int last = wordBounds.first(), current = wordBounds.next();
                 BreakIterator.DONE != current;
                 last = current, current = wordBounds.next()) {
-
             boolean isWord = false;
             for (int offset = last; offset < current; ) {
                 final int codepoint = input.codePointAt(offset);
@@ -47,16 +45,13 @@ class UnicodeSplitter implements Splitter {
                     isWord = true;
                     break;
                 }
-
                 offset += Character.charCount(codepoint);
             }
             if (!isWord) {
                 continue;
             }
-
             splitWord(input.substring(last, current), receiver);
         }
-
         return receiver.endLine();
     }
 
@@ -69,7 +64,6 @@ class UnicodeSplitter implements Splitter {
             characters++;
             receiver.addChar(input.substring(start, end));
         }
-
         receiver.endWord();
     }
 }

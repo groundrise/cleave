@@ -36,7 +36,6 @@ public class Main {
     private static final long LOG_INTERVAL = 60 * 1000; // 1 minute
 
     public static void main(final String[] args) {
-
         try {
             final Options opts = CliFactory.parseArgumentsUsingInstance(new Options(), args);
             final Main program = new Main();
@@ -58,7 +57,6 @@ public class Main {
             log.error("Unexpected failure, probably a bug.", e);
             System.exit(1);
         }
-
         System.exit(0);
     }
 
@@ -68,7 +66,6 @@ public class Main {
     public int split(final List<File> inFiles, final PrintStream dest) throws IOException {
         Timer timer = new Timer();
         int changeCount = 0;
-
         for (File file : inFiles) {
             logProgress(changeCount);
             boolean madeChanges = split(file, dest);
@@ -76,10 +73,8 @@ public class Main {
                 changeCount++;
             }
         }
-
         logStatus(changeCount);
         timer.report();
-
         return changeCount;
     }
 
@@ -87,19 +82,16 @@ public class Main {
         if ("-".equals(src.getName())) {
             return 0 < split(System.in, dest);
         }
-
         if (!src.exists()) {
             throw new FileNotFoundException(src.getPath() + " does not exist.");
         }
         if (!src.canRead()) {
             throw new ArgumentValidationException("Unable to read from: " + src.getPath());
         }
-
         boolean result;
         try (final InputStream in = new BufferedInputStream(new FileInputStream(src))) {
             result = 0 < split(in, dest);
         }
-
         return result;
     }
 
@@ -107,7 +99,6 @@ public class Main {
         final Scanner chunker = new Scanner(in);
         final Receiver receiver = new ReceiveIntoStream(out);
         int changeCount = 0;
-
         while (chunker.hasNextLine()) {
             logProgress(changeCount);
             if (split(chunker.nextLine(), receiver)) {
@@ -125,7 +116,6 @@ public class Main {
             receiver.emptyLine();
             return true;
         }
-
         return splitter.split(line, receiver);
     }
 
@@ -133,14 +123,12 @@ public class Main {
         if (!log.isDebugEnabled()) {
             return;
         }
-
         // must have just started
         if (0 == lastlog) {
             log.debug("Now cleaving documents.");
             lastlog = new Date().getTime();
             return;
         }
-
         final long now = new Date().getTime();
         if (now > (lastlog + LOG_INTERVAL)) {
             log.debug("Cleaved {} documents, so far.", count);
@@ -151,7 +139,6 @@ public class Main {
     private void logStatus(final int count) {
         // reset progress logging
         lastlog = 0;
-
         if (0 == count) {
             log.info("Cleaved no documents.");
         } else {
