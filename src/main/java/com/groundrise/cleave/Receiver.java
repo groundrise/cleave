@@ -14,8 +14,8 @@
 package com.groundrise.cleave;
 
 interface Receiver {
-    public void addChar(final String c);
-    public void endWord();
-    public boolean endLine();
-    public void emptyLine();
+    void addChar(final String c);
+    void endWord();
+    boolean endLine();
+    void emptyLine();
 }

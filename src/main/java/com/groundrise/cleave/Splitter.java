@@ -14,7 +14,7 @@
 package com.groundrise.cleave;
 
 interface Splitter {
-    public long characters();
-    public long words();
-    public boolean split(final String input, final Receiver receiver);
+    long characters();
+    long words();
+    boolean split(final String input, final Receiver receiver);
 }
