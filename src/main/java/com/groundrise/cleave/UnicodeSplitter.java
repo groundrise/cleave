@@ -19,8 +19,8 @@ class UnicodeSplitter implements Splitter {
 
     private final BreakIterator wordBounds = BreakIterator.getWordInstance();
     private final BreakIterator charBounds = BreakIterator.getCharacterInstance();
-    private long words = 0;
-    private long characters = 0;
+    private long words;
+    private long characters;
 
     @Override
     public long characters() {

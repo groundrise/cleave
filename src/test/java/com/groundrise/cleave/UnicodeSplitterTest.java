@@ -23,9 +23,9 @@ public class UnicodeSplitterTest {
     class ValidatingReceiver implements Receiver {
 
         private final String[] words;
-        private int position = 0;
-        private int nChars = 0;
-        private int nWords = 0;
+        private int position;
+        private int nChars;
+        private int nWords;
 
         ValidatingReceiver(final String[] words) {
             this.words = words;
@@ -59,7 +59,7 @@ public class UnicodeSplitterTest {
         int nWords() { return this.nWords; }
     }
 
-    UnicodeSplitter splitter = null;
+    UnicodeSplitter splitter;
 
     @Before
     public void setUp() {
