@@ -28,11 +28,11 @@ class Options {
     void setHelp(final boolean help) {}
 
     List<File> getInputFiles() {
-        return inputFiles;
+        return this.inputFiles;
     }
 
     @Unparsed(name = "input files")
     void setInputFiles(final List<File> files) {
-        inputFiles.addAll(files);
+        this.inputFiles.addAll(files);
     }
 }

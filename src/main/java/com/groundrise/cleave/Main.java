@@ -67,20 +67,20 @@ public class Main {
         final Timer timer = new Timer();
         int changeCount = 0;
         for (final File file : inFiles) {
-            logProgress(changeCount);
-            final boolean madeChanges = split(file, dest);
+            this.logProgress(changeCount);
+            final boolean madeChanges = this.split(file, dest);
             if (madeChanges) {
                 changeCount++;
             }
         }
-        logStatus(changeCount);
+        this.logStatus(changeCount);
         timer.report();
         return changeCount;
     }
 
     public boolean split(final File src, final PrintStream dest) throws IOException {
         if ("-".equals(src.getName())) {
-            return 0 < split(System.in, dest);
+            return 0 < this.split(System.in, dest);
         }
         if (!src.exists()) {
             throw new FileNotFoundException(src.getPath() + " does not exist.");
@@ -90,7 +90,7 @@ public class Main {
         }
         boolean result;
         try (final InputStream in = new BufferedInputStream(new FileInputStream(src))) {
-            result = 0 < split(in, dest);
+            result = 0 < this.split(in, dest);
         }
         return result;
     }
@@ -100,8 +100,8 @@ public class Main {
         final Receiver receiver = new ReceiveIntoStream(out);
         int changeCount = 0;
         while (chunker.hasNextLine()) {
-            logProgress(changeCount);
-            if (split(chunker.nextLine(), receiver)) {
+            this.logProgress(changeCount);
+            if (this.split(chunker.nextLine(), receiver)) {
                 changeCount++;
             }
         }
@@ -116,7 +116,7 @@ public class Main {
             receiver.emptyLine();
             return true;
         }
-        return splitter.split(line, receiver);
+        return this.splitter.split(line, receiver);
     }
 
     private void logProgress(final int count) {
@@ -124,25 +124,25 @@ public class Main {
             return;
         }
         // must have just started
-        if (0 == lastlog) {
+        if (0 == this.lastlog) {
             log.debug("Now cleaving documents.");
-            lastlog = new Date().getTime();
+            this.lastlog = new Date().getTime();
             return;
         }
         final long now = new Date().getTime();
-        if (now > (lastlog + LOG_INTERVAL)) {
+        if (now > (this.lastlog + LOG_INTERVAL)) {
             log.debug("Cleaved {} documents, so far.", count);
-            lastlog = now;
+            this.lastlog = now;
         }
     }
 
     private void logStatus(final int count) {
         // reset progress logging
-        lastlog = 0;
+        this.lastlog = 0;
         if (0 == count) {
             log.info("Cleaved no documents.");
         } else {
-            log.info("Cleaved {} documents into {} words and {} characters.", new Object[]{count, splitter.words(), splitter.characters()});
+            log.info("Cleaved {} documents into {} words and {} characters.", new Object[]{count, this.splitter.words(), this.splitter.characters()});
         }
     }
 }

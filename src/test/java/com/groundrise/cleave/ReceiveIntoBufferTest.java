@@ -28,15 +28,15 @@ public class ReceiveIntoBufferTest {
 
     @Before
     public void setUp() {
-        buffer = new ByteArrayOutputStream();
-        final PrintStream ps = new PrintStream(buffer);
-        receiver = new ReceiveIntoStream(ps);
+        this.buffer = new ByteArrayOutputStream();
+        final PrintStream ps = new PrintStream(this.buffer);
+        this.receiver = new ReceiveIntoStream(ps);
     }
 
     @After
     public void tearDown() {
-        buffer   = null;
-        receiver = null;
+        this.buffer   = null;
+        this.receiver = null;
     }
 
     /**
@@ -44,8 +44,8 @@ public class ReceiveIntoBufferTest {
      */
     @Test
     public void emptyLineIsEmpty() {
-        receiver.endLine();
-        final String output = buffer.toString();
+        this.receiver.endLine();
+        final String output = this.buffer.toString();
         assertThat(output, is(""));
     }
 
@@ -54,8 +54,8 @@ public class ReceiveIntoBufferTest {
      */
     @Test
     public void emptyLineGetsNewline() {
-        receiver.emptyLine();
-        final String output = buffer.toString();
+        this.receiver.emptyLine();
+        final String output = this.buffer.toString();
         assertThat(output, is("\n"));
     }
 
@@ -64,10 +64,10 @@ public class ReceiveIntoBufferTest {
      */
     @Test
     public void testOneCharDocument() {
-        receiver.addChar("a");
-        receiver.endWord();
-        receiver.endLine();
-        final String output = buffer.toString();
+        this.receiver.addChar("a");
+        this.receiver.endWord();
+        this.receiver.endLine();
+        final String output = this.buffer.toString();
         assertThat(output, is("a\n \n\n"));
     }
 
@@ -76,11 +76,11 @@ public class ReceiveIntoBufferTest {
      */
     @Test
     public void testTwoCharDocument() {
-        receiver.addChar("a");
-        receiver.addChar("b");
-        receiver.endWord();
-        receiver.endLine();
-        final String output = buffer.toString();
+        this.receiver.addChar("a");
+        this.receiver.addChar("b");
+        this.receiver.endWord();
+        this.receiver.endLine();
+        final String output = this.buffer.toString();
         assertThat(output, is("a\nb\n \n\n"));
     }
 
@@ -89,11 +89,11 @@ public class ReceiveIntoBufferTest {
      */
     @Test
     public void testLongChar() {
-        receiver.addChar("abc");
-        receiver.addChar("de");
-        receiver.endWord();
-        receiver.endLine();
-        final String output = buffer.toString();
+        this.receiver.addChar("abc");
+        this.receiver.addChar("de");
+        this.receiver.endWord();
+        this.receiver.endLine();
+        final String output = this.buffer.toString();
         assertThat(output, is("abc\nde\n \n\n"));
     }
 
@@ -102,14 +102,14 @@ public class ReceiveIntoBufferTest {
      */
     @Test
     public void testTwoWordDocument() {
-        receiver.addChar("a");
-        receiver.addChar("b");
-        receiver.endWord();
-        receiver.addChar("c");
-        receiver.addChar("d");
-        receiver.endWord();
-        receiver.endLine();
-        final String output = buffer.toString();
+        this.receiver.addChar("a");
+        this.receiver.addChar("b");
+        this.receiver.endWord();
+        this.receiver.addChar("c");
+        this.receiver.addChar("d");
+        this.receiver.endWord();
+        this.receiver.endLine();
+        final String output = this.buffer.toString();
         assertThat(output, is("a\nb\n \nc\nd\n \n\n"));
     }
 
@@ -118,15 +118,15 @@ public class ReceiveIntoBufferTest {
      */
     @Test
     public void testFileSeparator() {
-        receiver.addChar("One");
-        receiver.endWord();
-        receiver.addChar("Two");
-        receiver.endWord();
-        receiver.endLine();
-        receiver.addChar("\u001c");
-        receiver.endWord();
-        receiver.endLine();
-        final String output = buffer.toString();
+        this.receiver.addChar("One");
+        this.receiver.endWord();
+        this.receiver.addChar("Two");
+        this.receiver.endWord();
+        this.receiver.endLine();
+        this.receiver.addChar("\u001c");
+        this.receiver.endWord();
+        this.receiver.endLine();
+        final String output = this.buffer.toString();
         assertThat(output, is("One\n \nTwo\n \n\n\u001c\n \n\n"));
     }
 }

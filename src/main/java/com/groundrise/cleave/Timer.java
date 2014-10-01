@@ -29,13 +29,13 @@ class Timer {
     Timer() {
         final ThreadMXBean bean = ManagementFactory.getThreadMXBean();
         if (bean.isCurrentThreadCpuTimeSupported()) {
-            startCpu  = bean.getCurrentThreadCpuTime();
-            startUser = bean.getCurrentThreadUserTime();
+            this.startCpu  = bean.getCurrentThreadCpuTime();
+            this.startUser = bean.getCurrentThreadUserTime();
         } else {
-            startUser = 0;
-            startCpu  = 0;
+            this.startUser = 0;
+            this.startCpu  = 0;
         }
-        startReal = System.nanoTime();
+        this.startReal = System.nanoTime();
     }
 
     void report() {
@@ -43,9 +43,9 @@ class Timer {
         final long endReal = System.nanoTime();
         final long endCpu  = bean.getCurrentThreadCpuTime();
         final long endUser = bean.getCurrentThreadUserTime();
-        final long currReal   = endReal - startReal;
-        final long currCpu    = endCpu  - startCpu;
-        final long currUser   = endUser - startUser;
+        final long currReal   = endReal - this.startReal;
+        final long currCpu    = endCpu  - this.startCpu;
+        final long currUser   = endUser - this.startUser;
         final long currSystem = currCpu - currUser;
         if (bean.isCurrentThreadCpuTimeSupported()) {
             log.info("{} ns real, {} ns user + {} ns system = {} ns CPU",

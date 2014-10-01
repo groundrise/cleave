@@ -28,34 +28,34 @@ class ReceiveIntoStream implements Receiver {
 
     @Override
     public void addChar(final String c) {
-        out.append(c);
-        out.append('\n');
-        last = Input.CHAR;
+        this.out.append(c);
+        this.out.append('\n');
+        this.last = Input.CHAR;
     }
 
     @Override
     public void endWord() {
-        if (Input.CHAR == last) {
-            out.append(' ');
-            out.append('\n');
+        if (Input.CHAR == this.last) {
+            this.out.append(' ');
+            this.out.append('\n');
         }
-        last = Input.WORD;
+        this.last = Input.WORD;
     }
 
     @Override
     public boolean endLine() {
-        if (Input.START == last) {
+        if (Input.START == this.last) {
             return false;
         }
-        out.append('\n');
-        last = Input.START;
+        this.out.append('\n');
+        this.last = Input.START;
         return true;
     }
 
     @Override
     public void emptyLine() {
-        assert Input.START == last;
-        out.append('\n');
-        last = Input.START;
+        assert Input.START == this.last;
+        this.out.append('\n');
+        this.last = Input.START;
     }
 }

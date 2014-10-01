@@ -24,20 +24,20 @@ class UnicodeSplitter implements Splitter {
 
     @Override
     public long characters() {
-        return characters;
+        return this.characters;
     }
 
     @Override
     public long words() {
-        return words;
+        return this.words;
     }
 
     @Override
     public boolean split(final String input, final Receiver receiver) {
-        wordBounds.setText(input);
-        for (int last = wordBounds.first(), current = wordBounds.next();
+        this.wordBounds.setText(input);
+        for (int last = this.wordBounds.first(), current = this.wordBounds.next();
                 BreakIterator.DONE != current;
-                last = current, current = wordBounds.next()) {
+                last = current, current = this.wordBounds.next()) {
             boolean isWord = false;
             for (int offset = last; offset < current; ) {
                 final int codepoint = input.codePointAt(offset);
@@ -50,18 +50,18 @@ class UnicodeSplitter implements Splitter {
             if (!isWord) {
                 continue;
             }
-            splitWord(input.substring(last, current), receiver);
+            this.splitWord(input.substring(last, current), receiver);
         }
         return receiver.endLine();
     }
 
     private void splitWord(final String input, final Receiver receiver) {
-        words++;
-        charBounds.setText(input);
-        for (int start = charBounds.first(), end = charBounds.next();
+        this.words++;
+        this.charBounds.setText(input);
+        for (int start = this.charBounds.first(), end = this.charBounds.next();
                 BreakIterator.DONE != end;
-                start = end, end = charBounds.next()) {
-            characters++;
+                start = end, end = this.charBounds.next()) {
+            this.characters++;
             receiver.addChar(input.substring(start, end));
         }
         receiver.endWord();

@@ -33,16 +33,16 @@ public class UnicodeSplitterTest {
 
         @Override
         public void addChar(final String c) {
-            assertEquals(words[nWords].substring(position, position + c.length()), c);
-            position += c.length();
-            nChars++;
+            assertEquals(this.words[this.nWords].substring(this.position, this.position + c.length()), c);
+            this.position += c.length();
+            this.nChars++;
         }
 
         @Override
         public void endWord() {
-            position = 0;
-            nWords++;
-            if (nWords > words.length) {
+            this.position = 0;
+            this.nWords++;
+            if (this.nWords > this.words.length) {
                 fail("Too many words found.");
             }
         }
@@ -55,25 +55,25 @@ public class UnicodeSplitterTest {
         @Override
         public void emptyLine() {}
 
-        int nChars() { return nChars; }
-        int nWords() { return nWords; }
+        int nChars() { return this.nChars; }
+        int nWords() { return this.nWords; }
     }
 
     UnicodeSplitter splitter = null;
 
     @Before
     public void setUp() {
-        splitter = new UnicodeSplitter();
+        this.splitter = new UnicodeSplitter();
    }
 
     @After
     public void tearDown() {
-        splitter = null;
+        this.splitter = null;
     }
 
     void checkSplit(final String text, final String[] words, final int nChars) {
         final ValidatingReceiver receiver = new ValidatingReceiver(words);
-        splitter.split(text, receiver);
+        this.splitter.split(text, receiver);
         assertEquals(nChars, receiver.nChars());
         assertEquals(words.length, receiver.nWords());
     }
@@ -84,8 +84,8 @@ public class UnicodeSplitterTest {
 
     @Test
     public void testSplitSimpleSentences() {
-        checkSplit("Hello, my name is Steve.",    new String[] { "Hello", "my", "name", "is", "Steve" }, 18);
-        checkSplit("Nick said: \"I will run!\".", new String[] { "Nick", "said", "I", "will", "run" },   16);
+        this.checkSplit("Hello, my name is Steve.",    new String[] { "Hello", "my", "name", "is", "Steve" }, 18);
+        this.checkSplit("Nick said: \"I will run!\".", new String[] { "Nick", "said", "I", "will", "run" },   16);
     }
 
     /**
@@ -93,7 +93,7 @@ public class UnicodeSplitterTest {
      */
     @Test
     public void testSplitSimpleWords() {
-        checkSplit("Steve",    new String[] { "Steve"    }, 5);
-        checkSplit("Nicholas", new String[] { "Nicholas" }, 8);
+        this.checkSplit("Steve",    new String[] { "Steve"    }, 5);
+        this.checkSplit("Nicholas", new String[] { "Nicholas" }, 8);
     }
 }

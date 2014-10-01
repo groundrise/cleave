@@ -31,16 +31,16 @@ public class MainTest {
 
     @Before
     public void setUp() {
-        program = new Main();
-        baos = new ByteArrayOutputStream();
-        ps = new PrintStream(baos);
+        this.program = new Main();
+        this.baos = new ByteArrayOutputStream();
+        this.ps = new PrintStream(this.baos);
     }
 
     @After
     public void tearDown() {
-        program = null;
-        baos = null;
-        ps = null;
+        this.program = null;
+        this.baos = null;
+        this.ps = null;
     }
 
     private InputStream wrap(final String in) {
@@ -52,9 +52,9 @@ public class MainTest {
      */
     @Test
     public void testSplitEmptyContents() {
-        final int result = program.split(wrap(""), ps);
+        final int result = this.program.split(this.wrap(""), this.ps);
         assertThat(result, is(0));
-        assertThat(baos.toString(), is(""));
+        assertThat(this.baos.toString(), is(""));
     }
 
     /**
@@ -62,9 +62,9 @@ public class MainTest {
      */
     @Test
     public void testOneEmptyLine() {
-        final int result = program.split(wrap("\n"), ps);
+        final int result = this.program.split(this.wrap("\n"), this.ps);
         assertThat(result, is(1));
-        assertThat(baos.toString(), is("\n"));
+        assertThat(this.baos.toString(), is("\n"));
     }
 
     /**
@@ -72,9 +72,9 @@ public class MainTest {
      */
     @Test
     public void noOutputForWhitespace() {
-        final int result = program.split(wrap("   \t     \n"), ps);
+        final int result = this.program.split(this.wrap("   \t     \n"), this.ps);
         assertThat(result, is(0));
-        assertThat(baos.toString(), is(""));
+        assertThat(this.baos.toString(), is(""));
     }
 
     /**
@@ -82,8 +82,8 @@ public class MainTest {
      */
     @Test
     public void removeWhitespaceLine() {
-        final int result = program.split(wrap("one\n   \t\t\t \ntwo\n"), ps);
-        final String output = baos.toString();
+        final int result = this.program.split(this.wrap("one\n   \t\t\t \ntwo\n"), this.ps);
+        final String output = this.baos.toString();
         assertThat(result, is(2));
         assertThat(output.length(), is(18));
     }
@@ -94,8 +94,8 @@ public class MainTest {
     @Test
     public void testSplitsContent() {
         final String contents = "A short document.";
-        final int result = program.split(wrap(contents), ps);
-        final String output = baos.toString();
+        final int result = this.program.split(this.wrap(contents), this.ps);
+        final String output = this.baos.toString();
         assertThat(result, is(1));
         assertThat(output.length(), is(greaterThan(contents.length())));
     }
@@ -106,8 +106,8 @@ public class MainTest {
     @Test
     public void testSplitsSingleDocumentInStream() {
         final String contents = "A short document.";
-        final int changed = program.split(wrap(contents), ps);
-        final String output = baos.toString();
+        final int changed = this.program.split(this.wrap(contents), this.ps);
+        final String output = this.baos.toString();
         assertThat(changed, is(1));
         assertThat(output.length(), is(greaterThan(contents.length())));
     }
@@ -118,8 +118,8 @@ public class MainTest {
     @Test
     public void testSplitsMultipleDocuments() {
         final String contents = "one\ntwo\n";
-        final int changed = program.split(wrap(contents), ps);
-        final String output = baos.toString();
+        final int changed = this.program.split(this.wrap(contents), this.ps);
+        final String output = this.baos.toString();
         assertThat(changed, is(2));
         assertThat(output.length(), is(greaterThan(contents.length())));
     }
