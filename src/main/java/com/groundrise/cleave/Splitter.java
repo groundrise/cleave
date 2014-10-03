@@ -1,5 +1,5 @@
-/*
- * cleave - a tool to break apart English text
+/**
+ * Cleave - A tool to break apart English text.
  *
  * Written in 2014 by Nicholas Bugajski <nick@groundrise.com>
  *
@@ -11,6 +11,7 @@
  * with this software. If not, see
  * <http://creativecommons.org/publicdomain/zero/1.0/>.
  */
+
 package com.groundrise.cleave;
 
 /**
