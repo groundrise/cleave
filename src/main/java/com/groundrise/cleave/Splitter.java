@@ -13,8 +13,30 @@
  */
 package com.groundrise.cleave;
 
+/**
+ * Splits strings into words and then those words into characters.
+ *
+ * @author Nicholas Bugajski (nick@groundrise.com)
+ */
 interface Splitter {
+    /**
+     * Current count of characters output.
+     * @return Character count
+     */
     long characters();
+
+    /**
+     * Current count of words output.
+     * @return Word count
+     */
     long words();
+
+    /**
+     * Split the input into words, then the words into characters, outputting
+     * each into the given receiver.
+     * @param input Text to split
+     * @param receiver Consumer of split text
+     * @return True if any splitting occurs
+     */
     boolean split(final String input, final Receiver receiver);
 }
