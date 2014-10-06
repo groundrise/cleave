@@ -65,7 +65,7 @@ class UnicodeSplitter implements Splitter {
                 BreakIterator.DONE != current;
                 last = current, current = this.wordBounds.next()) {
             boolean isWord = false;
-            for (int offset = last; offset < current; ) {
+            for (int offset = last; offset < current;) {
                 final int codepoint = input.codePointAt(offset);
                 if (Character.isLetterOrDigit(codepoint)) {
                     isWord = true;
