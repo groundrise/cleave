@@ -38,7 +38,7 @@ import org.slf4j.LoggerFactory;
  *
  * @author Nicholas Bugajski (nick@groundrise.com)
  */
-public class Main {
+public final class Main {
     /**
      * Logger for errors and status.
      */
