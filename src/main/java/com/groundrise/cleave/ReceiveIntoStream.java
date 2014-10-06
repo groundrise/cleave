@@ -49,8 +49,8 @@ class ReceiveIntoStream implements Receiver {
      * PrintStream.
      * @param out Stream to write to
      */
-    ReceiveIntoStream(final PrintStream out) {
-        this.out = out;
+    ReceiveIntoStream(final PrintStream ps) {
+        this.out = ps;
     }
 
     @Override
