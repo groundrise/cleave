@@ -34,7 +34,8 @@ class UnicodeSplitter implements Splitter {
     /**
      * Finds boundaries between characters.
      */
-    private final BreakIterator charBounds = BreakIterator.getCharacterInstance();
+    private final BreakIterator charBounds =
+            BreakIterator.getCharacterInstance();
 
     /**
      * Current count of words output.
@@ -59,7 +60,8 @@ class UnicodeSplitter implements Splitter {
     @Override
     public boolean split(final String input, final Receiver receiver) {
         this.wordBounds.setText(input);
-        for (int last = this.wordBounds.first(), current = this.wordBounds.next();
+        for (int last = this.wordBounds.first(),
+                current = this.wordBounds.next();
                 BreakIterator.DONE != current;
                 last = current, current = this.wordBounds.next()) {
             boolean isWord = false;

@@ -55,7 +55,8 @@ public class Main {
      */
     public static void main(final String[] args) {
         try {
-            final Options opts = CliFactory.parseArgumentsUsingInstance(new Options(), args);
+            final Options opts = CliFactory.parseArgumentsUsingInstance(
+                    new Options(), args);
             final Main program = new Main();
             final List<File> files = opts.getInputFiles();
             if (0 == files.size()) {
@@ -65,7 +66,8 @@ public class Main {
         } catch (final HelpRequestedException e) {
             LOG.info(e.getMessage());
             System.exit(0);
-        } catch (final ArgumentValidationException | InvalidOptionSpecificationException e) {
+        } catch (final ArgumentValidationException |
+                InvalidOptionSpecificationException e) {
             LOG.error(e.getMessage());
             System.exit(1);
         } catch (final IOException ex) {
@@ -98,7 +100,8 @@ public class Main {
      * @return Number of files processed
      * @throws IOException If there is a problem opening or reading the files
      */
-    public int split(final List<File> inFiles, final PrintStream dest) throws IOException {
+    public int split(final List<File> inFiles, final PrintStream dest)
+            throws IOException {
         final Timer timer = new Timer();
         int changeCount = 0;
         for (final File file : inFiles) {
@@ -122,7 +125,8 @@ public class Main {
      * @return True if any work is done
      * @throws IOException If there is a problem opening or reading the file
      */
-    public boolean split(final File src, final PrintStream dest) throws IOException {
+    public boolean split(final File src, final PrintStream dest)
+            throws IOException {
         if ("-".equals(src.getName())) {
             return 0 < this.split(System.in, dest);
         }
@@ -130,10 +134,13 @@ public class Main {
             throw new FileNotFoundException(src.getPath() + " does not exist.");
         }
         if (!src.canRead()) {
-            throw new ArgumentValidationException("Unable to read from: " + src.getPath());
+            throw new ArgumentValidationException(
+                    "Unable to read from: " + src.getPath()
+            );
         }
         boolean result;
-        try (final InputStream in = new BufferedInputStream(new FileInputStream(src))) {
+        try (final InputStream in =
+                new BufferedInputStream(new FileInputStream(src))) {
             result = 0 < this.split(in, dest);
         }
         return result;
@@ -210,7 +217,13 @@ public class Main {
         if (0 == count) {
             LOG.info("Cleaved no documents.");
         } else {
-            LOG.info("Cleaved {} documents into {} words and {} characters.", new Object[]{count, this.splitter.words(), this.splitter.characters()});
+            LOG.info("Cleaved {} documents into {} words and {} characters.",
+                    new Object[]{
+                        count,
+                        this.splitter.words(),
+                        this.splitter.characters()
+                    }
+            );
         }
     }
 }
