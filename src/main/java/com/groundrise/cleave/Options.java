@@ -38,7 +38,8 @@ class Options {
      * @param help True if want help message
      */
     @Option(helpRequest = true, description = "display help", shortName = "h")
-    void setHelp(final boolean help) {}
+    void setHelp(final boolean help) {
+    }
 
     /**
      * Current input file list.
