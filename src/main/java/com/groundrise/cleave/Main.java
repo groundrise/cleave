@@ -25,6 +25,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintStream;
+import java.nio.charset.StandardCharsets;
 import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
@@ -155,7 +156,7 @@ public final class Main {
      * @return Number of lines processed
      */
     public int split(final InputStream in, final PrintStream out) {
-        final Scanner chunker = new Scanner(in);
+        final Scanner chunker = new Scanner(in, StandardCharsets.UTF_8.name());
         final Receiver receiver = new ReceiveIntoStream(out);
         int changeCount = 0;
         while (chunker.hasNextLine()) {
