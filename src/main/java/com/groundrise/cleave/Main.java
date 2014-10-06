@@ -42,7 +42,7 @@ public class Main {
     /**
      * Logger for errors and status.
      */
-    private static final Logger log = LoggerFactory.getLogger(Main.class);
+    private static final Logger LOG = LoggerFactory.getLogger(Main.class);
 
     /**
      * Interval, in milliseconds, at which progress will be logged.
@@ -63,16 +63,16 @@ public class Main {
             }
             program.split(files, System.out);
         } catch (final HelpRequestedException e) {
-            log.info(e.getMessage());
+            LOG.info(e.getMessage());
             System.exit(0);
         } catch (final ArgumentValidationException | InvalidOptionSpecificationException e) {
-            log.error(e.getMessage());
+            LOG.error(e.getMessage());
             System.exit(1);
         } catch (final IOException ex) {
-            log.error("IO Failure", ex);
+            LOG.error("IO Failure", ex);
             System.exit(1);
         } catch (final RuntimeException e) {
-            log.error("Unexpected failure, probably a bug.", e);
+            LOG.error("Unexpected failure, probably a bug.", e);
             System.exit(1);
         }
         System.exit(0);
@@ -180,37 +180,37 @@ public class Main {
     }
 
     /**
-     * Write progress to log, if at least LOG_INTERVAL has elapsed.
+     * Write progress to LOG, if at least LOG_INTERVAL has elapsed.
      * @param count Count of documents processed
      */
     private void logProgress(final int count) {
-        if (!log.isDebugEnabled()) {
+        if (!LOG.isDebugEnabled()) {
             return;
         }
         // must have just started
         if (0 == this.lastlog) {
-            log.debug("Now cleaving documents.");
+            LOG.debug("Now cleaving documents.");
             this.lastlog = new Date().getTime();
             return;
         }
         final long now = new Date().getTime();
         if (now > (this.lastlog + LOG_INTERVAL)) {
-            log.debug("Cleaved {} documents, so far.", count);
+            LOG.debug("Cleaved {} documents, so far.", count);
             this.lastlog = now;
         }
     }
 
     /**
-     * Write statistics about work done to log.
+     * Write statistics about work done to LOG.
      * @param count Count of documents processed
      */
     private void logStatus(final int count) {
         // reset progress logging
         this.lastlog = 0;
         if (0 == count) {
-            log.info("Cleaved no documents.");
+            LOG.info("Cleaved no documents.");
         } else {
-            log.info("Cleaved {} documents into {} words and {} characters.", new Object[]{count, this.splitter.words(), this.splitter.characters()});
+            LOG.info("Cleaved {} documents into {} words and {} characters.", new Object[]{count, this.splitter.words(), this.splitter.characters()});
         }
     }
 }

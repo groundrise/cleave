@@ -32,7 +32,7 @@ class Timer {
     /**
      * For writing logging statements.
      */
-    private static final Logger log = LoggerFactory.getLogger(Timer.class);
+    private static final Logger LOG = LoggerFactory.getLogger(Timer.class);
 
     /**
      * Start time for CPU time (user + system mode).
@@ -65,7 +65,7 @@ class Timer {
     }
 
     /**
-     * Calculate current time elapsed and write to log.
+     * Calculate current time elapsed and write to LOG.
      */
     void report() {
         final ThreadMXBean bean = ManagementFactory.getThreadMXBean();
@@ -77,10 +77,10 @@ class Timer {
         final long currUser   = endUser - this.startUser;
         final long currSystem = currCpu - currUser;
         if (bean.isCurrentThreadCpuTimeSupported()) {
-            log.info("{} ns real, {} ns user + {} ns system = {} ns CPU",
+            LOG.info("{} ns real, {} ns user + {} ns system = {} ns CPU",
                     new Object[]{currReal, currUser, currSystem, currCpu});
         } else {
-            log.info("{}ns real", currReal);
+            LOG.info("{}ns real", currReal);
         }
     }
 }
