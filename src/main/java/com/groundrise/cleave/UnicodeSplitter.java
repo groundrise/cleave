@@ -16,11 +16,34 @@ package com.groundrise.cleave;
 
 import com.ibm.icu.text.BreakIterator;
 
+/**
+ * Splits strings into words and then those words into characters according to
+ * the Unicode standard as implemented by IBM's ICU library.
+ *
+ * See: http://userguide.icu-project.org/boundaryanalysis
+ *
+ * @author Nicholas Bugajski (nick@groundrise.com)
+ */
 class UnicodeSplitter implements Splitter {
 
+    /**
+     * Finds boundaries between words.
+     */
     private final BreakIterator wordBounds = BreakIterator.getWordInstance();
+
+    /**
+     * Finds boundaries between characters.
+     */
     private final BreakIterator charBounds = BreakIterator.getCharacterInstance();
+
+    /**
+     * Current count of words output.
+     */
     private long words;
+
+    /**
+     * Current count of characters output.
+     */
     private long characters;
 
     @Override
@@ -56,6 +79,11 @@ class UnicodeSplitter implements Splitter {
         return receiver.endLine();
     }
 
+    /**
+     * Split word into characters.
+     * @param input Word to be split
+     * @param receiver Consumer of split text
+     */
     private void splitWord(final String input, final Receiver receiver) {
         this.words++;
         this.charBounds.setText(input);

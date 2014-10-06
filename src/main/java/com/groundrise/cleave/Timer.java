@@ -19,14 +19,39 @@ import java.lang.management.ThreadMXBean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * Report the amount of time elapsed to a log.
+ *
+ * Information is written to the log "INFO" method.  CPU, User and Real time
+ * elapsed are all written out.  Start time is time of object construction.
+ *
+ * @author Nicholas Bugajski (nick@groundrise.com)
+ */
 class Timer {
 
+    /**
+     * For writing logging statements.
+     */
     private static final Logger log = LoggerFactory.getLogger(Timer.class);
 
+    /**
+     * Start time for CPU time (user + system mode).
+     */
     private final long startCpu;
+
+    /**
+     * Start time for user mode CPU time.
+     */
     private final long startUser;
+
+    /**
+     * Start time for clock/real time.
+     */
     private final long startReal;
 
+    /**
+     * Constructs and starts a timer object.
+     */
     Timer() {
         final ThreadMXBean bean = ManagementFactory.getThreadMXBean();
         if (bean.isCurrentThreadCpuTimeSupported()) {
@@ -39,6 +64,9 @@ class Timer {
         this.startReal = System.nanoTime();
     }
 
+    /**
+     * Calculate current time elapsed and write to log.
+     */
     void report() {
         final ThreadMXBean bean = ManagementFactory.getThreadMXBean();
         final long endReal = System.nanoTime();

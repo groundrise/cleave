@@ -22,6 +22,10 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
+/**
+ * Test case for {@link ReceiveIntoStream} class.
+ * @author Nicholas Bugajski (nick@groundrise.com)
+ */
 public class ReceiveIntoBufferTest {
 
     private ByteArrayOutputStream buffer;

@@ -24,6 +24,10 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
+/**
+ * Test case for {@link Main} class.
+ * @author Nicholas Bugajski (nick@groundrise.com)
+ */
 public class MainTest {
 
     private Main program;

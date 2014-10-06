@@ -16,13 +16,39 @@ package com.groundrise.cleave;
 
 import java.io.PrintStream;
 
+/**
+ * Receives words, one character at a time and outputs those words onto the
+ * given print stream.
+ *
+ * On output:
+ * - characters are separated by spaces " "
+ * - words are delimited by newlines "\n"
+ * - lines are delimited by a blank line "\n"
+ *
+ * @author Nicholas Bugajski (nick@groundrise.com)
+ */
 class ReceiveIntoStream implements Receiver {
 
+    /**
+     * State machine states.
+     */
     private enum Input { START, CHAR, WORD }
 
+    /**
+     * Stream to write output to.
+     */
     private final PrintStream out;
+
+    /**
+     * Keep track of state changes.
+     */
     private Input last = Input.START;
 
+    /**
+     * Construct a receiver stream that will write output to the given
+     * PrintStream.
+     * @param out Stream to write to
+     */
     ReceiveIntoStream(final PrintStream out) {
         this.out = out;
     }

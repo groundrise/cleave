@@ -14,9 +14,31 @@
 
 package com.groundrise.cleave;
 
+/**
+ * Receives words, one character at a time to allow for delimiting.
+ *
+ * @author Nicholas Bugajski (nick@groundrise.com)
+ */
 interface Receiver {
+    /**
+     * Add a character to the output.
+     * @param c Character to output
+     */
     void addChar(final String c);
+
+    /**
+     * Mark the end of a word.
+     */
     void endWord();
+
+    /**
+     * Mark the end of a line/sentence/document.
+     * @return True if line was not empty
+     */
     boolean endLine();
+
+    /**
+     * Output an empty line.
+     */
     void emptyLine();
 }

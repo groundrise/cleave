@@ -31,11 +31,28 @@ import java.util.Scanner;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * Break up text into words, then those words into characters.
+ *
+ * Files are processed line by line, so reasonable size lines are assumed.
+ *
+ * @author Nicholas Bugajski (nick@groundrise.com)
+ */
 public class Main {
-
+    /**
+     * Logger for errors and status.
+     */
     private static final Logger log = LoggerFactory.getLogger(Main.class);
+
+    /**
+     * Interval, in milliseconds, at which progress will be logged.
+     */
     private static final long LOG_INTERVAL = 60 * 1000; // 1 minute
 
+    /**
+     * Command line invocation of program.
+     * @param args Arguments for program
+     */
     public static void main(final String[] args) {
         try {
             final Options opts = CliFactory.parseArgumentsUsingInstance(new Options(), args);
@@ -61,9 +78,26 @@ public class Main {
         System.exit(0);
     }
 
+    /**
+     * Splitter for text.
+     */
     private final Splitter splitter = new UnicodeSplitter();
+
+    /**
+     * Wall clock time, in milliseconds, at which the last logging statement
+     * was written.
+     */
     private long lastlog;
 
+    /**
+     * Split files, one file at a time, line by line, into words and then into
+     * characters writing results into given output stream.
+     *
+     * @param inFiles Files to read from
+     * @param dest Stream to write to
+     * @return Number of files processed
+     * @throws IOException If there is a problem opening or reading the files
+     */
     public int split(final List<File> inFiles, final PrintStream dest) throws IOException {
         final Timer timer = new Timer();
         int changeCount = 0;
@@ -79,6 +113,15 @@ public class Main {
         return changeCount;
     }
 
+    /**
+     * Split file, one line at a time, into words and then into characters
+     * writing results into given output stream.
+     *
+     * @param src File to read from
+     * @param dest Stream to write to
+     * @return True if any work is done
+     * @throws IOException If there is a problem opening or reading the file
+     */
     public boolean split(final File src, final PrintStream dest) throws IOException {
         if ("-".equals(src.getName())) {
             return 0 < this.split(System.in, dest);
@@ -96,6 +139,14 @@ public class Main {
         return result;
     }
 
+    /**
+     * Split input stream, one line at a time, into words and then into
+     * characters writing results into given output stream.
+     *
+     * @param in Stream to read from
+     * @param out Stream to write to
+     * @return Number of lines processed
+     */
     public int split(final InputStream in, final PrintStream out) {
         final Scanner chunker = new Scanner(in);
         final Receiver receiver = new ReceiveIntoStream(out);
@@ -109,6 +160,14 @@ public class Main {
         return changeCount;
     }
 
+    /**
+     * Split given string of text into words and then into characters putting
+     * result into the given receiver.
+     *
+     * @param line Text to split
+     * @param receiver Receiver of split text
+     * @return True if any work is done
+     */
     private boolean split(final String line, final Receiver receiver) {
         if (null == line) {
             return false;
@@ -120,6 +179,10 @@ public class Main {
         return this.splitter.split(line, receiver);
     }
 
+    /**
+     * Write progress to log, if at least LOG_INTERVAL has elapsed.
+     * @param count Count of documents processed
+     */
     private void logProgress(final int count) {
         if (!log.isDebugEnabled()) {
             return;
@@ -137,6 +200,10 @@ public class Main {
         }
     }
 
+    /**
+     * Write statistics about work done to log.
+     * @param count Count of documents processed
+     */
     private void logStatus(final int count) {
         // reset progress logging
         this.lastlog = 0;

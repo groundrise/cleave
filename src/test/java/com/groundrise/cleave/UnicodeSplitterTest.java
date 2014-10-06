@@ -19,6 +19,10 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
+/**
+ * Test case for {@link UnicodeSplitter} class.
+ * @author Nicholas Bugajski (nick@groundrise.com)
+ */
 public class UnicodeSplitterTest {
 
     class ValidatingReceiver implements Receiver {
